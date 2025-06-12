@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonia Terapêutica - Cardápio de Serviços</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #4A4A4A;
+            background: linear-gradient(135deg, #F8F6F3 0%, #F1EDE8 50%, #EDE7E0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 50px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #D4A574, #E8C4A0, #F2D7B8);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2em;
+            font-weight: 700;
+            color: #8B6F47;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #9B8B7A;
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .therapist-info {
+            background: linear-gradient(135deg, #D4A574 0%, #C19A68 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            margin-top: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+        }
+
+        .therapist-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .therapist-title {
+            font-size: 0.95em;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #D4A574, #E8C4A0);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+            border-color: rgba(212, 165, 116, 0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #8B6F47;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+
+        .service-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #D4A574, #E8C4A0);
+            border-radius: 12px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .service-description {
+            color: #6B6B6B;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .service-benefits {
+            background: linear-gradient(135deg, #FAF8F5, #F5F1EC);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .benefits-title {
+            font-weight: 600;
+            color: #8B6F47;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 6px 0;
+            position: relative;
+            padding-left: 25px;
+            color: #5A5A5A;
+            font-size: 0.95em;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #D4A574;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .service-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(212, 165, 116, 0.15);
+        }
+
+        .duration {
+            background: linear-gradient(135deg, #8B6F47, #A08068);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: #D4A574;
+            letter-spacing: -1px;
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #8B6F47;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #8B6F47, #A08068);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 111, 71, 0.2);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 111, 71, 0.3);
+        }
+
+        .contact-item-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-item-content {
+            font-size: 0.95em;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #D4A574, #C19A68);
+            color: white;
+            padding: 16px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 165, 116, 0.4);
+            background: linear-gradient(135deg, #C19A68, #B08A5C);
+        }
+
+        .payment-methods {
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #FAF8F5, #F5F1EC);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .payment-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #8B6F47;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .payment-list {
+            color: #6B6B6B;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5em;
+            }
+            
+            .service-details {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .decorative-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.08) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decorative-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .decorative-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 8%;
+            animation-delay: 3s;
+        }
+
+        .decorative-circle:nth-child(3) {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg); 
+                opacity: 0.8;
+            }
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.3), transparent);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-elements">
+        <div class="decorative-circle"></div>
+        <div class="decorative-circle"></div>
+        <div class="decorative-circle"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">Harmonia Terapêutica</div>
+            <div class="subtitle">Seu refúgio de bem-estar e cuidado personalizado</div>
+            <div class="therapist-info">
+                <div class="therapist-name">Dra. Mariana Silva</div>
+                <div class="therapist-title">Fisioterapeuta Especializada em Massoterapia<br>8 anos de experiência dedicados ao seu bem-estar</div>
+            </div>
+        </header>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">🌸</div>
+                    Massagem Relaxante
+                </div>
+                <div class="service-description">
+                    Técnica sueca com movimentos suaves e rítmicos que promove relaxamento profundo, aliviando o estresse do dia a dia e proporcionando uma sensação de paz interior e renovação.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Redução significativa do estresse e ansiedade</li>
+                        <li>Melhoria da qualidade do sono</li>
+                        <li>Alívio de tensões musculares</li>
+                        <li>Liberação natural de endorfinas</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">60 minutos</div>
+                    <div class="price">R$ 120</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">💧</div>
+                    Drenagem Linfática
+                </div>
+                <div class="service-description">
+                    Técnica especializada que estimula delicadamente o sistema linfático, promovendo a eliminação natural de toxinas e reduzindo inchaços de forma eficaz e duradoura.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Redução de inchaços e retenção de líquidos</li>
+                        <li>Desintoxicação profunda do organismo</li>
+                        <li>Melhoria da circulação sanguínea</li>
+                        <li>Fortalecimento do sistema imunológico</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">90 minutos</div>
+                    <div class="price">R$ 180</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">⚡</div>
+                    Massagem Desportiva
+                </div>
+                <div class="service-description">
+                    Ideal para atletas e pessoas ativas, focada na recuperação muscular, prevenção de lesões e otimização do desempenho físico através de técnicas especializadas.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Recuperação muscular acelerada</li>
+                        <li>Prevenção eficaz de lesões</li>
+                        <li>Remoção de ácido láctico</li>
+                        <li>Melhoria do desempenho atlético</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">75 minutos</div>
+                    <div class="price">R$ 150</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">🦶</div>
+                    Reflexologia Podal
+                </div>
+                <div class="service-description">
+                    Técnica milenar que trabalha pontos reflexos específicos nos pés, promovendo equilíbrio energético e bem-estar em todo o organismo de forma natural e harmoniosa.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Relaxamento profundo e duradouro</li>
+                        <li>Melhoria da função digestiva</li>
+                        <li>Equilíbrio energético corporal</li>
+                        <li>Alívio de dores de cabeça e enxaquecas</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">50 minutos</div>
+                    <div class="price">R$ 100</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">🎯</div>
+                    Massagem Profunda
+                </div>
+                <div class="service-description">
+                    Técnica intensiva que atua nas camadas musculares mais profundas, especialmente desenvolvida para dores crônicas e tensões persistentes que necessitam de abordagem especializada.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Alívio eficaz de dores crônicas</li>
+                        <li>Liberação de pontos de tensão profundos</li>
+                        <li>Melhoria significativa da mobilidade</li>
+                        <li>Redução de processos inflamatórios</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">60 minutos</div>
+                    <div class="price">R$ 140</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-title">
+                    <div class="service-icon">🌺</div>
+                    Shiatsu
+                </div>
+                <div class="service-description">
+                    Técnica japonesa tradicional que trabalha com pressão digital em pontos específicos, promovendo equilíbrio energético e relaxamento profundo através da harmonização corpo-mente.
+                </div>
+                <div class="service-benefits">
+                    <div class="benefits-title">Benefícios Terapêuticos</div>
+                    <ul class="benefits-list">
+                        <li>Equilíbrio da energia vital (Ki)</li>
+                        <li>Redução do estresse e ansiedade</li>
+                        <li>Melhoria da flexibilidade corporal</li>
+                        <li>Harmonização completa corpo-mente</li>
+                    </ul>
+                </div>
+                <div class="service-details">
+                    <div class="duration">60 minutos</div>
+                    <div class="price">R$ 130</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="contact-section">
+            <div class="contact-title">Agende Sua Sessão</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-title">📱 WhatsApp</div>
+                    <div class="contact-item-content">(11) 98765-4321<br>Atendimento personalizado</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-title">📍 Localização</div>
+                    <div class="contact-item-content">Rua das Flores, 456<br>Centro - São Paulo/SP</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-title">🕒 Horários</div>
+                    <div class="contact-item-content">Segunda a Sexta: 8h às 19h<br>Sábado: 8h às 16h</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-title">📸 Instagram</div>
+                    <div class="contact-item-content">@harmoniaterapeutica<br>Acompanhe nossas dicas</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="https://wa.me/5511987654321" class="cta-button">
+                    💬 Agendar pelo WhatsApp
+                </a>
+                <a href="tel:+5511987654321" class="cta-button">
+                    📞 Ligar Agora
+                </a>
+            </div>
+            
+            <div class="payment-methods">
+                <div class="payment-title">Formas de Pagamento Aceitas</div>
+                <div class="payment-list">Dinheiro • PIX • Cartão de Débito • Cartão de Crédito</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
